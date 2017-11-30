@@ -9,7 +9,7 @@ var Bookstore = (function(){
 	// On an iteration over array, if passed paramenter (like isbn) does not exist in the array, then f = 0
 	var f = 0;
 
-	// books constructor
+	// Books constructor
 	function Addbooks(isbn, name, author, year, price, stock){
 		this.isbn = isbn;
 		this.name = name;
