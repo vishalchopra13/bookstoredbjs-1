@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>List all the books</title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="css/bootstrap.min.css" rel="stylesheet" media="all"/>
+	<link href="css/animate.css" rel="stylesheet" media="all">
+	<script src="js/jquery.js" type="text/javascript"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript"></script>
+
+	<style type="text/css">
+	.getinput{
+		margin-top: 15px;
+	}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="page-header">
+			<h2>Welcome To Admin Control Panel</h2>
+		</div>
+		
+		<ul class="nav nav-tabs">
+		  <li class="active"><a data-toggle="tab" href="#home">Database</a></li>
+		  <li><a data-toggle="tab" href="#add">Add</a></li>
+		  <li><a data-toggle="tab" href="#update">Update</a></li>
+		  <li><a data-toggle="tab" href="#advanced">Advanced</a></li>
+		</ul>
+
+		<div class="tab-content">
+		<div id="home" class="tab-pane fade in active">
+			    <h3>Database</h3>
+			    <div class="table-responsive">
+				    <table class="table table-bordered">
+				    	<thead>
+				    		<tr>
+				    			<th>ISBN</th>
+				    			<th>NAME</th>
+				    			<th>AUTHOR</th>
+				    			<th>YEAR</th>
+				    			<th>PRICE</th>
+				    			<th>STOCK</th>
+				    			<th></th>
+				    		</tr>
+				    	</thead>
+				    	<tbody id="datahtml">
+				    	</tbody>
+				    </table>
+				</div>
+		  </div>
+		  <div id="add" class="tab-pane fade">
+		  		<br/>
+				<div id="alert1"></div>
+			    <h3>Add</h3>
+			    <div id="booksform-add">
+			    	ISBN: <input type="text" id="isbn" class="form-control getinput"/>
+					NAME: <input type="text" id="name" class="form-control getinput"/>
+					AUTHOR: <input type="text" id="author" class="form-control getinput"/>
+					YEAR: <input type="text" id="year" class="form-control getinput"/>
+					STOCK: <input type="text" id="stock" class="form-control getinput"/>
+					PRICE: <input type="text" id="price" class="form-control getinput"/><br/>
+					<input type="button" id="submit" class="btn btn-block btn-primary" value="Submit" />
+			    </div>
+		  </div>
+		  <div id="update" class="tab-pane fade">
+		  		<br/>
+			    <div id="alert2"></div>
+			    <h3>Update</h3>
+			    <h4>Enter a valid ISBN number in order to update the inventory!</h4>
+			    <div id="booksform-update">
+			    		ISBN: <input type="text" id="isbn1" class="form-control getinput"/>
+						NAME: <input type="text" id="name1" class="form-control getinput"/>
+						AUTHOR: <input type="text" id="author1" class="form-control getinput"/>
+						YEAR: <input type="text" id="year1" class="form-control getinput"/>
+						STOCK: <input type="text" id="stock1" class="form-control getinput"/>
+						PRICE: <input type="text" id="price1" class="form-control getinput"/><br/>
+						<input type="button" id="form-update-submit" class="btn btn-block btn-primary" value="Submit" />
+			    </div>
+		  </div>
+		  <div id="advanced" class="tab-pane fade">
+		    <h3>Advanced</h3>
+		    <h4>Do you want to destroy the database?</h4>
+		    <h5>Then click on the below button</h5>
+		    <input type="button" value="Delete" class="btn btn-danger" id="destroy"/><br/><br/>
+		    <div id="alert"></div>
+		  </div>
+		</div>
+
+	</div>
+
+	<div class="modal-footer" style="margin-top: 50px;">
+		<p>Developed by Vishal Chopra</p>
+	</div>
+	<!-- template -->
+
+	<!-- My script -->
+	<script src="/bookStore/js/defaultbooks.js" type="text/javascript"></script>
+	<script src="/bookStore/js/bookstore.js" type="text/javascript"></script> <!-- Module -->
+	<script type="text/javascript">
+		// Add the books to the database
+		$('#submit').click(function(){
+			var isbn = $('#isbn').val();
+			var name = $('#name').val();
+			var author = $('#author').val();
+			var price = $('#price').val();
+			var year = $('#year').val();
+			var stock = $('#stock').val();
+
+			if(isbn === "" || name === "" || author === "" || price === "" || year === "" || stock === ""){ 
+				// alert
+				$('#alert1').addClass('alert alert-info');
+				$('#alert1').html('Input field empty!');
+				return;
+			} else if(isNaN(price) || isNaN(stock) || isNaN(year)){
+				// alert
+				$('#alert1').addClass('alert alert-info');
+				$('#alert1').html('Price or stock is not a number!');
+				return;
+			} else {
+				Bookstore.addbooks(isbn, name, author, year, price, stock);
+				// alert
+				$('#alert1').addClass('alert alert-info');
+				$('#alert1').html('New Data is inserted');
+			}
+			displaydb();
+		});
+
+		// Display the data to the page 
+		function displaydb(){
+			var data = Bookstore.listdata();
+			var temp = "";
+			for(var i in data){
+				temp += '<tr>';
+				temp += '<td>' + data[i].isbn + '</td>';
+				temp += '<td>' + data[i].name + '</td>';
+				temp += '<td>' + data[i].author + '</td>';
+				temp += '<td>' + data[i].year + '</td>';
+				temp += '<td>' + data[i].price + '</td>';
+				temp += '<td>' + data[i].stock + '</td>';
+				temp += '<td><button id="remove" data-isbn="' + data[i].isbn + '" class="btn btn-primary">Remove</button></td>';
+				temp += '</tr>';
+			}
+			$('#datahtml').html(temp);
+		}
+		displaydb();
+
+		// Remove items
+		$('.table-responsive').on('click', '#remove', function(){
+			var _attr = $(this).attr('data-isbn');
+			Bookstore.delete(_attr);
+			displaydb();
+		});
+
+		
+		$('#form-update-submit').click(function(){
+			//alert('hi');
+			var isbn1 = $('#isbn1').val();
+			var name1 = $('#name1').val();
+			var author1 = $('#author1').val();
+			var year1 = $('#year1').val();
+			var price1 = $('#price1').val();
+			var stock1 = $('#stock1').val();
+			var check_exist = Bookstore.search(isbn1);
+			if(check_exist !== false){
+				Bookstore.update(isbn1).value(isbn1, name1, author1, year1, price1, stock1);
+				displaydb();
+				$('#alert2').addClass('alert alert-info');
+				$('#alert2').html('Sucessfuly Updated!');
+				return;
+			} 
+			$('#alert2').addClass('alert alert-danger');
+			$('#alert2').html('The ISBN, that your provided, does not exists!');
+		});
+
+		// Destroy the database
+		$('#destroy').click(function(){
+				Bookstore.clearDatabase();
+				$('#alert').addClass('alert alert-info');
+				$('#alert').html('Database destroyed! And it can\'t be restored back!');
+				displaydb();
+		});
+	</script>
+</body>
+</html>
