@@ -15,27 +15,33 @@ Features:
 
   Bookstore.addbooks(isbn, name, author, year, price, stock);
   
+  
 2. Search for a book using the iSBN number
 
   Bookstore.search(isbn);
   
   This search function will return the an object containing the books info. If book is not in the database then it will return false.
   
+  
 3. Update a book
 
   Bookstore.update(isbn).value(isbn, name, author, year, price, stock);
+  
   
 4. Update only the available stock
 
   Bookstore.updateStock(isbn, newStock);
   
+  
 5. Delete a book from the database using the isbn number
 
   Bookstore.delete(isbn);
   
+  
 6. listdata:- This contains the entire copy of the books array. So that the original array will not change by mistake.
 
   To get the clone: Bookstore.listdata();
+  
   
 7. clearDatabase,
 
