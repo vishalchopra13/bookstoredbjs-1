@@ -11,7 +11,7 @@ You are free to make changes to it.
 
 # Features:
 
-# 1. Add books to the the database, use the belwo commmand
+# 1. Add books to the the database, use the below commmand
 
         Bookstore.addbooks(isbn, name, author, year, price, stock);
   
@@ -20,7 +20,7 @@ You are free to make changes to it.
 
         Bookstore.search(isbn);
   
-  This search function will return the an object containing the books info. If book is not in the database then it will return false.
+  This search function will return an object containing the books info. If book is not in the database then it will return false.
   
   
 # 3. Update a book
