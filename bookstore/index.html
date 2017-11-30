@@ -110,7 +110,7 @@
 				$('#alert1').addClass('alert alert-info');
 				$('#alert1').html('Input field empty!');
 				return;
-			} else if($.isNumeric(price) || $.isNumeric(stock) || $.isNumeric(year)){
+			} else if($.isNumeric(price) === false|| $.isNumeric(stock) === false || $.isNumeric(year) === false){
 				// alert
 				$('#alert1').addClass('alert alert-info');
 				$('#alert1').html('Price or stock is not a number!');
