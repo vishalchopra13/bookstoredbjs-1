@@ -47,7 +47,7 @@ You are free to make changes to it.
   
 # 7. clearDatabase
 
-  If you want to clear all teh data, then use the below command
+  If you want to clear all the data, then use the below command
   
        Bookstore.clearDatabase();
 
