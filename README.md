@@ -16,7 +16,7 @@ You are free to make changes to it.
         Bookstore.addbooks(isbn, name, author, year, price, stock);
   
   
-# 2. Search for a book using the iSBN number
+# 2. Search for a book using the ISBN number
 
         Bookstore.search(isbn);
   
@@ -33,7 +33,7 @@ You are free to make changes to it.
        Bookstore.updateStock(isbn, newStock);
   
   
-# 5. Delete a book from the database using the isbn number
+# 5. Delete a book from the database using the ISBN number
 
        Bookstore.delete(isbn);
   
