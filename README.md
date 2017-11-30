@@ -45,7 +45,7 @@ You are free to make changes to it.
        Bookstore.listdata();
   
   
-# 7. clearDatabase,
+# 7. clearDatabase
 
   If you want to clear all teh data, then use the below command
   
