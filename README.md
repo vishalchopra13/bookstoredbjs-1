@@ -7,7 +7,7 @@ This is a simple JavaScript program and does not have advanced functionality. Ho
 
 You are free to make changes to it.
 
-    https://github.com/vishalchopra13/bookstore-js-1/blob/master/bookstore/js/bookstore.js
+    https://github.com/pythonvishal/bookstore-js-1/blob/master/bookstore/js/bookstore.js
 
 # Features:
 
