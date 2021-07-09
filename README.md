@@ -55,6 +55,6 @@ You are free to make changes to it.
 
 Thanks, I hope you will like my this project. This is my first project and also the contribution.
 
-Module url:  https://github.com/vishalchopra13/bookstore-js-1/blob/master/bookstore/js/bookstore.js
+Module url:  https://github.com/pythonvishal/bookstore-js-1/blob/master/bookstore/js/bookstore.js
 
-My email hello@vishalchopra.me
+My email admin@pythonvishal.com
